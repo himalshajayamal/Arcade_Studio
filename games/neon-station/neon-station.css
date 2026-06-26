@@ -1,0 +1,5 @@
+:root { --accent: #ff2bd6; }
+.NeonStationShell .canvas-panel { border-color: color-mix(in srgb, #ff2bd6 45%, transparent); box-shadow: 0 0 32px color-mix(in srgb, #ff2bd6 20%, transparent), 0 18px 50px rgba(0,0,0,.45); }
+.NeonStationShell canvas { background: radial-gradient(circle at 50% 20%, rgba(255,255,255,.05), transparent 35%), #020712; }
+.NeonStationShell .title-block h1 { text-shadow: 0 0 24px color-mix(in srgb, #ff2bd6 45%, transparent); }
+.NeonStationShell .hud h2, .NeonStationShell .leaderboard h2, .NeonStationShell .help-panel h2 { color: #ff2bd6; }

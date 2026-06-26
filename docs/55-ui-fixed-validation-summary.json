@@ -1,0 +1,79 @@
+{
+  "base_zip": "game_arcade_41_locked15_bugfix_sound_win(1)(1).zip",
+  "games_total": 55,
+  "locked_games_preserved": 41,
+  "added_games": [
+    {
+      "number": 42,
+      "id": "fracture-jigsaw",
+      "title": "Fracture Jigsaw"
+    },
+    {
+      "number": 43,
+      "id": "royal-tactics-ai",
+      "title": "Royal Tactics AI"
+    },
+    {
+      "number": 44,
+      "id": "cross-sum-cipher",
+      "title": "Cross-Sum Cipher"
+    },
+    {
+      "number": 45,
+      "id": "chromatic-flow",
+      "title": "Chromatic Flow"
+    },
+    {
+      "number": 46,
+      "id": "vector-surge",
+      "title": "Vector Surge"
+    },
+    {
+      "number": 47,
+      "id": "danmaku-zero",
+      "title": "Danmaku Zero"
+    },
+    {
+      "number": 48,
+      "id": "volt-court",
+      "title": "Volt Court"
+    },
+    {
+      "number": 49,
+      "id": "pixel-globe",
+      "title": "Pixel Globe"
+    },
+    {
+      "number": 50,
+      "id": "primordial-clicker",
+      "title": "Primordial Clicker"
+    },
+    {
+      "number": 51,
+      "id": "lexical-drift",
+      "title": "Lexical Drift"
+    },
+    {
+      "number": 52,
+      "id": "chromatic-ear",
+      "title": "Chromatic Ear"
+    },
+    {
+      "number": 53,
+      "id": "void-harvest",
+      "title": "Void Harvest"
+    },
+    {
+      "number": 54,
+      "id": "polarity-wars",
+      "title": "Polarity Wars"
+    },
+    {
+      "number": 55,
+      "id": "pixel-oracle",
+      "title": "Pixel Oracle"
+    }
+  ],
+  "ui_base": "game_arcade_41_locked15_bugfix_sound_win",
+  "cache_bust": "js/main.js?v=55-ui-fixed"
+}

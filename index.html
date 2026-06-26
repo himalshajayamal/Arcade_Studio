@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Industry Grade Browser Arcade</title>
+  <meta name="description" content="Client-side HTML5 arcade with 58 playable games and shared architecture.">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" href="assets/images/4_Pixel_art_Classic_Arcade_Joystick.png" type="image/png">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="Game Arcade Home"><span>🕹️</span><strong>Game Arcade</strong></a>
+    <nav class="top-actions" aria-label="Arcade actions">
+      <button id="showAllBtn" class="nav-btn active" type="button">All Games</button>
+      <button id="favoritesBtn" class="nav-btn" type="button">Favorites</button>
+      <button id="statsBtn" class="nav-btn" type="button">Stats</button>
+      <button id="contrastBtn" class="nav-btn" type="button">Contrast</button>
+      <button id="muteBtn" class="nav-btn" type="button">Mute</button>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <p class="eyebrow">No backend • No fetch • GitHub Pages ready</p>
+      <h1>58-game browser arcade platform</h1>
+      <p>The stable 55-game arcade is preserved and upgraded, with games 56–58 added as high-end browser showpiece shooters from the new design plan.</p>
+    </div>
+    <aside class="stats-panel" id="statsPanel" aria-live="polite"></aside>
+  </section>
+
+  <section class="controls" aria-label="Game filters">
+    <label class="search-box"><span>Search</span><input id="searchInput" type="search" placeholder="Snake, AI, puzzle, strategy..."></label>
+    <label><span>Category</span><select id="categorySelect"></select></label>
+    <label><span>Sort</span><select id="sortSelect"><option value="order">Game number</option><option value="name">Name</option><option value="difficulty">Difficulty</option><option value="category">Category</option></select></label>
+  </section>
+
+  <main class="game-grid" id="gameGrid" aria-live="polite"></main>
+
+  <footer class="site-footer">
+    <p>Built with HTML, CSS, Canvas, Web Audio API, and localStorage. Runs directly from <code>file://</code> or GitHub Pages.</p>
+  </footer>
+
+  <script src="js/storage.js"></script>
+  <script src="js/audio-engine.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js?v=58-highend-fixed"></script>
+</body>
+</html>

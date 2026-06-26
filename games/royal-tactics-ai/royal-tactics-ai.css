@@ -1,0 +1,5 @@
+:root { --accent:#e6d4a3; --accent-2:#e6d4a3; }
+.royal-tactics-ai-shell .canvas-panel { border-color: color-mix(in srgb, #e6d4a3 42%, transparent); box-shadow:0 18px 55px rgba(0,0,0,.45), inset 0 0 35px rgba(255,255,255,.03); }
+.royal-tactics-ai-shell .hud h2, .royal-tactics-ai-shell .leaderboard h2, .royal-tactics-ai-shell .help-panel h2 { color:#e6d4a3; }
+.royal-tactics-ai-shell canvas { background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.06), transparent 25rem), #061020; }
+.royal-tactics-ai-shell .game-btn:hover, .royal-tactics-ai-shell .back-link:hover { border-color:#e6d4a3; }

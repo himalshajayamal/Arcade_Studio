@@ -1,0 +1,5 @@
+:root { --accent:#ffd166; --accent-2:#ffd166; }
+.cross-sum-cipher-shell .canvas-panel { border-color: color-mix(in srgb, #ffd166 42%, transparent); box-shadow:0 18px 55px rgba(0,0,0,.45), inset 0 0 35px rgba(255,255,255,.03); }
+.cross-sum-cipher-shell .hud h2, .cross-sum-cipher-shell .leaderboard h2, .cross-sum-cipher-shell .help-panel h2 { color:#ffd166; }
+.cross-sum-cipher-shell canvas { background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.06), transparent 25rem), #061020; }
+.cross-sum-cipher-shell .game-btn:hover, .cross-sum-cipher-shell .back-link:hover { border-color:#ffd166; }

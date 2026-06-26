@@ -1,0 +1,5 @@
+:root { --accent:#36e28f; --accent-2:#36e28f; }
+.pixel-globe-shell .canvas-panel { border-color: color-mix(in srgb, #36e28f 42%, transparent); box-shadow:0 18px 55px rgba(0,0,0,.45), inset 0 0 35px rgba(255,255,255,.03); }
+.pixel-globe-shell .hud h2, .pixel-globe-shell .leaderboard h2, .pixel-globe-shell .help-panel h2 { color:#36e28f; }
+.pixel-globe-shell canvas { background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.06), transparent 25rem), #061020; }
+.pixel-globe-shell .game-btn:hover, .pixel-globe-shell .back-link:hover { border-color:#36e28f; }

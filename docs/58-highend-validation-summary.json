@@ -1,0 +1,16 @@
+{
+  "total_games": 58,
+  "unique_ids": 58,
+  "unique_titles": 58,
+  "metadata_first_55_unchanged": true,
+  "locked_55_game_folders_changed": 0,
+  "new_high_end_games": [
+    "Dungeon Sector",
+    "Neon Station",
+    "Vortex Command"
+  ],
+  "runtime_fetch_calls_in_js_and_games": 0,
+  "missing_required_game_files": [],
+  "root_ready": true,
+  "cache_bust": true
+}

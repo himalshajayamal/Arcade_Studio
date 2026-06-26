@@ -1,0 +1,2 @@
+canvas { background: linear-gradient(180deg, #061020, #0b1430); }
+.title-block h1::before { content: "🏓 "; }
