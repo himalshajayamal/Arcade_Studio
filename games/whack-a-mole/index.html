@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Whack-a-Mole Extreme - Game Arcade</title>
+  <link rel="stylesheet" href="../../css/game-base.css">
+  <link rel="stylesheet" href="../../css/feedback.css?v=brand-feedback-1">
+  <link rel="stylesheet" href="whack-a-mole.css">
+</head>
+<body>
+  <div class="game-shell">
+    <header class="game-header">
+      <a class="back-link" href="../../index.html">← Arcade</a>
+      <div class="title-block"><h1>Whack-a-Mole Extreme</h1><p>Hit moles quickly before the timer ends.</p></div>
+      <div class="game-actions">
+        <button id="pauseBtn" class="game-btn" type="button">Pause</button>
+        <button id="restartBtn" class="game-btn" type="button">Restart</button>
+        <button id="muteBtn" class="game-btn" type="button">Sound</button>
+      </div>
+    </header>
+    <main class="play-wrap">
+      <section class="canvas-panel">
+        <canvas id="gameCanvas" width="800" height="600" tabindex="0" aria-label="Whack-a-Mole Extreme canvas"></canvas>
+        <div id="message" class="message" aria-live="assertive"></div>
+        <div class="touch-controls" aria-label="Touch controls">
+          <div class="dpad">
+            <span class="blank"></span><button class="touch-btn" data-action="up">▲</button><span class="blank"></span>
+            <button class="touch-btn" data-action="left">◀</button><button class="touch-btn" data-action="down">▼</button><button class="touch-btn" data-action="right">▶</button>
+          </div>
+          <p class="small-note">Keyboard: arrows/WASD, Space/Enter action, P pause, R restart. Touch buttons and swipes work on mobile.</p>
+          <div class="action-stack"><button class="touch-btn" data-action="action">ACTION</button><button class="touch-btn" data-action="secondary">ALT</button></div>
+        </div>
+      </section>
+      <aside class="side-panel">
+        <div id="hud" class="hud"></div>
+        <div id="leaderboard" class="leaderboard"></div>
+        <div class="help-panel"><h2>Goal</h2><p class="small-note">Hit moles quickly before the timer ends.</p></div>
+      </aside>
+    </main>
+  </div>
+  <script src="../../js/storage.js"></script>
+  <script src="../../js/audio-engine.js"></script>
+  <script src="../../js/utils.js"></script>
+  <script src="../../js/input-manager.js"></script>
+  <script src="../../js/game-core.js"></script>
+  <script src="whack-a-mole.js"></script>
+  <script src="../../js/feedback.js?v=brand-feedback-1"></script>
+</body>
+</html>

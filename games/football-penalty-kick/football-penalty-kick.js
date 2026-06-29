@@ -1,0 +1,9 @@
+class FootballPenaltyKick extends BaseGame{
+  rewardWin(message, reward, bonus=250){ if(this.over) return; this.score += bonus; StorageManager.saveAchievement(this.gameId, 'reward-'+reward.toLowerCase().replace(/[^a-z0-9]+/g,'-'), 'Reward: '+reward); this.win(message + ' — Reward: ' + reward); }
+
+ reset(){this.ball={x:400,y:520,tx:400,ty:520,shoot:false,t:0};this.keeper={x:400,dir:1};this.shots=8;this.score=0;if(!this.boundControls){this.boundControls=true;this.canvas.addEventListener('pointerdown',e=>this.kick(e));}}
+ kick(e){if(this.ball.shoot||this.shots<=0)return;let p=this.pointer(e);if(p.y>330||p.x<180||p.x>620)return;this.ball.tx=p.x;this.ball.ty=p.y;this.ball.shoot=true;this.ball.t=0;this.shots--;AudioEngine.play('shoot');}
+ update(dt){this.keeper.x+=this.keeper.dir*220*dt;if(this.keeper.x<250||this.keeper.x>550)this.keeper.dir*=-1;if(this.ball.shoot){this.ball.t+=dt*1.9;let t=Math.min(1,this.ball.t),sx=400,sy=520;this.ball.x=sx+(this.ball.tx-sx)*t;this.ball.y=sy+(this.ball.ty-sy)*t;if(t>=1){let save=Math.abs(this.ball.tx-this.keeper.x)<70&&this.ball.ty>145&&this.ball.ty<285;if(save){AudioEngine.play('failure');}else{this.score+=100;AudioEngine.play('success');}this.ball={x:400,y:520,tx:400,ty:520,shoot:false,t:0};}}if(this.shots<=0&&!this.ball.shoot){this.score>=400?this.rewardWin('Penalty Hero', 'Penalty Hero Cup'):this.gameOver('Keeper Wins');}this.updateHUD({Shots:this.shots,Goal:'4 goals',Reward:'Penalty Hero Cup'});}
+ draw(){let c=this.ctx;c.fillStyle='#166534';c.fillRect(0,0,800,600);c.strokeStyle='#fff';c.lineWidth=5;c.strokeRect(180,80,440,250);c.strokeRect(310,80,180,90);c.fillStyle='#ff4d6d';c.fillRect(this.keeper.x-60,205,120,22);c.fillRect(this.keeper.x-16,175,32,52);c.fillStyle='#fff';c.beginPath();c.arc(this.ball.x,this.ball.y,15,0,7);c.fill();}
+}
+document.addEventListener('DOMContentLoaded',()=>{window.currentGame=new FootballPenaltyKick('football-penalty-kick','Football Penalty Kick');window.currentGame.start();});

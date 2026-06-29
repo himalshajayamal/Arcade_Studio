@@ -1,0 +1,27 @@
+canvas { background: linear-gradient(180deg, #061020, #0b1430); }
+.title-block h1::before { content: "🔢 "; }
+
+.mode-panel {
+  display: grid;
+  gap: .6rem;
+  margin-bottom: 1rem;
+}
+
+.mode-panel h2 {
+  margin: 0;
+}
+
+.mode-btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.mode-btn.active {
+  border-color: rgba(24, 224, 255, .95);
+  box-shadow: 0 0 18px rgba(24, 224, 255, .24), inset 0 0 16px rgba(24, 224, 255, .12);
+  background: linear-gradient(135deg, rgba(24, 224, 255, .22), rgba(122, 92, 255, .16));
+}
+
+#modeText {
+  margin-top: .2rem;
+}

@@ -1,0 +1,16 @@
+
+class ChromaticEar extends BaseGame{
+  constructor(){ super('chromatic-ear','Chromatic Ear'); this.canvas.addEventListener('pointerdown',e=>this.pick(e)); this.freq=[261.63,293.66,329.63,392,440,523.25]; }
+  rewardWin(message,reward,bonus=900){ if(this.over)return; this.score+=bonus; StorageManager.saveAchievement(this.gameId,'reward-chromatic-ear','Reward: '+reward); AudioEngine.play('reward'); this.win(message+' — Reward: '+reward); }
+  reset(){ this.tiles=['C','D','E','G','A','C2']; this.cols=['#ff4d6d','#ffd166','#36e28f','#18e0ff','#b47cff','#ffffff']; this.sequence=[]; this.round=1; this.user=0; this.playing=false; this.flash=-1; this.lives=3; this.score=0; this.token=(this.token||0)+1; this.nextRound(); }
+  tone(i,d=.28){ const ctx=AudioEngine.ensure?.(); if(!ctx) { AudioEngine.play('coin'); return; } try{ const o=ctx.createOscillator(), g=ctx.createGain(); o.frequency.value=this.freq[i]; o.type='sine'; g.gain.value=.12; g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+d); o.connect(g); g.connect(ctx.destination); o.start(); o.stop(ctx.currentTime+d+.02); }catch{ AudioEngine.play('coin'); } }
+  nextRound(){ this.sequence.push(Math.floor(Math.random()*6)); this.user=0; this.playSeq(); }
+  playSeq(){ const token=++this.token; this.playing=true; this.flash=-1; this.sequence.forEach((n,i)=>setTimeout(()=>{ if(this.token!==token||this.over)return; this.flash=n; this.tone(n); setTimeout(()=>{ if(this.token===token)this.flash=-1; },280); },500+i*520)); setTimeout(()=>{ if(this.token===token)this.playing=false; },650+this.sequence.length*520); }
+  pick(e){ if(this.playing||this.over||this.paused) return; const p=this.pointer(e); for(let i=0;i<6;i++){ const x=96+(i%3)*205,y=180+Math.floor(i/3)*155; if(p.x>x&&p.x<x+160&&p.y>y&&p.y<112+y){ this.press(i); } } }
+  press(i){ this.flash=i; setTimeout(()=>this.flash=-1,160); this.tone(i,.18); if(i===this.sequence[this.user]){ this.user++; this.score+=50; if(this.user>=this.sequence.length){ this.round++; AudioEngine.play('success'); if(this.round>8){ this.rewardWin('Perfect pitch-memory chain','Chromatic Ear Laurel',1200); return; } setTimeout(()=>this.nextRound(),700); } } else { this.lives--; this.user=0; AudioEngine.play('failure'); if(this.lives<=0)this.gameOver('Sequence lost'); else setTimeout(()=>this.playSeq(),650); } }
+  update(){ this.updateHUD({Round:`${this.round}/8`,Sequence:this.sequence.length,Input:this.playing?'listen':'repeat',Goal:'Complete 8 rounds',Reward:'Chromatic Ear Laurel'}); }
+  draw(){ const c=this.ctx; c.fillStyle='#061020'; c.fillRect(0,0,800,600); c.fillStyle='#cbd7ff'; c.font='18px system-ui'; c.fillText('Listen to the notes, then repeat the color sequence. Each round grows longer.',116,84);
+    for(let i=0;i<6;i++){ const x=96+(i%3)*205,y=180+Math.floor(i/3)*155; c.fillStyle=this.cols[i]; c.globalAlpha=this.flash===i?1:.64; c.fillRect(x,y,160,112); c.globalAlpha=1; c.strokeStyle=this.flash===i?'#fff':'#ffffff55'; c.lineWidth=4; c.strokeRect(x,y,160,112); c.fillStyle=i===5?'#061020':'#fff'; c.font='bold 32px system-ui'; c.textAlign='center'; c.fillText(this.tiles[i],x+80,y+68); c.textAlign='left'; }
+  }
+}
+window.currentGame=new ChromaticEar(); window.currentGame.start();

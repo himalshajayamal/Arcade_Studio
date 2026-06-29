@@ -1,0 +1,18 @@
+{
+  "totalGames": 41,
+  "lockedFirst15FilesChecked": 45,
+  "lockedFirst15Mismatches": 0,
+  "bugfixes": [
+    "Sudoku win validation",
+    "Word Search selection",
+    "Bubble Shooter loss/aiming",
+    "Match-3 move availability",
+    "Platformer finish overlay",
+    "Checkers sound",
+    "Crossword real puzzle",
+    "Sliding shuffle"
+  ],
+  "runtimeFetchCalls": 0,
+  "syntaxCheck": "passed",
+  "targetedWinRegression": "passed"
+}

@@ -1,0 +1,10 @@
+class SlidingPuzzleHD extends BaseGame{
+  rewardWin(message, reward, bonus=250){ if(this.over) return; this.score += bonus; StorageManager.saveAchievement(this.gameId, 'reward-'+reward.toLowerCase().replace(/[^a-z0-9]+/g,'-'), 'Reward: '+reward); this.win(message + ' — Reward: ' + reward); }
+
+ reset(){this.n=4;this.cell=95;this.off={x:210,y:90};this.tiles=[...Array(15).keys()].map(i=>i+1).concat(0);for(let i=0;i<160;i++){let m=this.moves();this.swap(Utils.choice(m));}while(this.tiles.slice(0,15).every((v,i)=>v===i+1)){let m=this.moves();this.swap(Utils.choice(m));}this.movesMade=0;this.score=1000;if(!this.boundControls){this.boundControls=true;this.canvas.addEventListener('pointerdown',e=>this.pick(e));}}
+ zi(){return this.tiles.indexOf(0);}moves(){let z=this.zi(),x=z%4,y=Math.floor(z/4),a=[];for(const [dx,dy]of[[1,0],[-1,0],[0,1],[0,-1]]){let nx=x+dx,ny=y+dy;if(nx>=0&&ny>=0&&nx<4&&ny<4)a.push(ny*4+nx);}return a;}swap(i){let z=this.zi();[this.tiles[z],this.tiles[i]]=[this.tiles[i],this.tiles[z]];}
+ pick(e){let p=this.pointer(e),x=Math.floor((p.x-this.off.x)/this.cell),y=Math.floor((p.y-this.off.y)/this.cell),i=y*4+x;if(this.moves().includes(i)){this.swap(i);this.movesMade++;AudioEngine.play('click');}}
+ update(){if(this.tiles.slice(0,15).every((v,i)=>v===i+1)){this.score=Math.max(100,1500-this.movesMade*20);this.rewardWin('Puzzle Solved', 'Puzzle Master Tile');}this.updateHUD({Moves:this.movesMade,Goal:'Order 1-15',Reward:'Puzzle Master Tile'});}
+ draw(){let c=this.ctx;c.font='38px sans-serif';c.textAlign='center';c.textBaseline='middle';for(let i=0;i<16;i++){let v=this.tiles[i],x=i%4,y=Math.floor(i/4);if(!v)continue;c.fillStyle='#7c5cff';c.fillRect(this.off.x+x*this.cell+5,this.off.y+y*this.cell+5,this.cell-10,this.cell-10);c.fillStyle='#fff';c.fillText(v,this.off.x+x*this.cell+this.cell/2,this.off.y+y*this.cell+this.cell/2);}}
+}
+document.addEventListener('DOMContentLoaded',()=>{window.currentGame=new SlidingPuzzleHD('sliding-puzzle-hd','Sliding Puzzle HD');window.currentGame.start();});

@@ -1,0 +1,1 @@
+Extract the ZIP first, then open index.html. Do not open index.html inside the compressed ZIP preview because CSS/JS may not load. Upload the extracted contents directly to the GitHub repository root.

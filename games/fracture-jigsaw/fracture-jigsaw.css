@@ -1,0 +1,5 @@
+:root { --accent:#ffd166; --accent-2:#ffd166; }
+.fracture-jigsaw-shell .canvas-panel { border-color: color-mix(in srgb, #ffd166 42%, transparent); box-shadow:0 18px 55px rgba(0,0,0,.45), inset 0 0 35px rgba(255,255,255,.03); }
+.fracture-jigsaw-shell .hud h2, .fracture-jigsaw-shell .leaderboard h2, .fracture-jigsaw-shell .help-panel h2 { color:#ffd166; }
+.fracture-jigsaw-shell canvas { background: radial-gradient(circle at 50% 40%, rgba(255,255,255,.06), transparent 25rem), #061020; }
+.fracture-jigsaw-shell .game-btn:hover, .fracture-jigsaw-shell .back-link:hover { border-color:#ffd166; }

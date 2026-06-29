@@ -1,0 +1,19 @@
+
+class PixelGlobe extends BaseGame{
+  constructor(){ super('pixel-globe','Pixel Globe'); this.canvas.addEventListener('pointerdown',e=>this.pick(e)); }
+  rewardWin(message,reward,bonus=1200){ if(this.over)return; this.score+=bonus; StorageManager.saveAchievement(this.gameId,'reward-pixel-globe','Reward: '+reward); AudioEngine.play('reward'); this.win(message+' — Reward: '+reward); }
+  reset(){ this.locations=[{name:'Kyoto, Japan',lat:35,lon:135,clue:'Temple roof, Japanese signs, cedar hills.'},{name:'Paris, France',lat:49,lon:2,clue:'Stone boulevard, iron tower silhouette, café awning.'},{name:'Cairo, Egypt',lat:30,lon:31,clue:'Desert light, Arabic sign, pyramids far away.'},{name:'Rio, Brazil',lat:-23,lon:-43,clue:'Green mountain, beach curve, Portuguese words.'},{name:'Reykjavik, Iceland',lat:64,lon:-22,clue:'Lava rock, low sun, Nordic coast road.'}]; this.round=0; this.guess=null; this.reveal=false; this.score=0; this.lives=5; }
+  pick(e){ if(this.over||this.paused) return; const p=this.pointer(e); if(p.y>315&&p.y<555&&p.x>70&&p.x<730){ const lon=(p.x-70)/660*360-180, lat=90-(p.y-315)/240*180; this.guess={x:p.x,y:p.y,lat,lon}; AudioEngine.play('click'); } else if(p.x>610&&p.y>246&&p.y<292) this.submit(); }
+  handleAction(){ this.submit(); }
+  dist(a,b){ const R=6371, dLat=(b.lat-a.lat)*Math.PI/180, dLon=(b.lon-a.lon)*Math.PI/180, la1=a.lat*Math.PI/180, la2=b.lat*Math.PI/180; const h=Math.sin(dLat/2)**2+Math.cos(la1)*Math.cos(la2)*Math.sin(dLon/2)**2; return 2*R*Math.asin(Math.sqrt(h)); }
+  submit(){ if(!this.guess||this.reveal) return; const loc=this.locations[this.round]; const d=this.dist(this.guess,loc); const pts=Math.floor(5000*Math.exp(-d/2200)); this.score+=pts; this.last={d:Math.floor(d),pts,real:{x:70+(loc.lon+180)/360*660,y:315+(90-loc.lat)/180*240}}; this.reveal=true; AudioEngine.play(pts>3000?'success':'warning'); setTimeout(()=>{ if(this.over)return; this.round++; this.guess=null; this.reveal=false; if(this.round>=this.locations.length){ if(this.score>=14000)this.rewardWin('Expert world run','Pixel Globe Atlas',1800); else this.gameOver('World score below expert level'); } },1600); }
+  update(){ this.updateHUD({Round:`${Math.min(this.round+1,5)}/5`,Target:'14,000+',Guess:this.guess?'placed':'none',Goal:'Score expert run',Reward:'Pixel Globe Atlas'}); }
+  draw(){ const c=this.ctx, loc=this.locations[this.round]||this.locations[4]; c.fillStyle='#071020'; c.fillRect(0,0,800,600);
+    c.fillStyle='#152033'; c.fillRect(70,70,470,210); c.fillStyle='#cbd7ff'; c.font='bold 22px system-ui'; c.fillText('Round '+Math.min(this.round+1,5)+' Location Photo',96,108); c.font='18px system-ui'; c.fillStyle='#fff'; c.fillText(loc.clue,96,160); c.fillStyle='#18e0ff'; c.fillRect(96,200,360,15); c.fillStyle='#ffd166'; c.beginPath(); c.arc(450,138,30,0,Math.PI*2); c.fill();
+    c.fillStyle='#36e28f'; c.fillRect(610,246,120,46); c.fillStyle='#071020'; c.font='bold 18px system-ui'; c.fillText('CONFIRM',624,275);
+    c.fillStyle='#0e2740'; c.fillRect(70,315,660,240); c.strokeStyle='#18e0ff'; c.strokeRect(70,315,660,240); c.fillStyle='#183d55'; for(let i=0;i<9;i++){ c.beginPath(); c.ellipse(150+i*70,390+Math.sin(i)*45,58,25,Math.sin(i),0,Math.PI*2); c.fill(); } c.fillStyle='#9fb3ff'; c.fillText('Click your guess on the world map, then confirm.',84,586);
+    if(this.guess){ c.fillStyle='#ff4d6d'; c.beginPath(); c.arc(this.guess.x,this.guess.y,8,0,Math.PI*2); c.fill(); }
+    if(this.reveal&&this.last){ c.strokeStyle='#fff'; c.beginPath(); c.moveTo(this.guess.x,this.guess.y); c.lineTo(this.last.real.x,this.last.real.y); c.stroke(); c.fillStyle='#36e28f'; c.beginPath(); c.arc(this.last.real.x,this.last.real.y,8,0,Math.PI*2); c.fill(); c.fillStyle='#fff'; c.font='bold 18px system-ui'; c.fillText(`${loc.name}: ${this.last.d} km, +${this.last.pts}`,98,300); }
+  }
+}
+window.currentGame=new PixelGlobe(); window.currentGame.start();
